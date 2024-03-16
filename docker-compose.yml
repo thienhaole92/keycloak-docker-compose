@@ -99,3 +99,9 @@ services:
       - ./grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
       - ./grafana/datasources:/etc/grafana/provisioning/datasources:ro
     logging: *logging
+
+  postgres-exporter:
+    image: quay.io/prometheuscommunity/postgres-exporter
+    restart: unless-stopped
+    environment:
+      DATA_SOURCE_NAME: "postgresql://keycloak:password@postgres:5432/keycloak?sslmode=disable"
